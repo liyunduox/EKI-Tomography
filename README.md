@@ -4,17 +4,17 @@
 CPU 4-core processor (Recommended 10-core processor or higher)
 
 RAM 16GB (Recommended 64GB or higher)
-# Operating System	Requirements
+## Operating System	Requirements
 Windows
-# Software Requirements
+## Software Requirements
 Julia	1.8.1
-# Package Requirements
+## Package Requirements
 Distributions, StatsBase, Optim, QuadGK, Convex, SCS, Plots, PyPlot, JLD2, MAT, FLUX, jInv, MathOptInterface, DocStringExtensions, GaussianRandomFields
-# Already integrated Packages
+## Already integrated Packages
 EnsembleKalmanProcesses (https://github.com/CliMA/EnsembleKalmanProcesses.jl)
 
 FactoredEikonalFastMarching (https://github.com/JuliaInv/FactoredEikonalFastMarching.jl)
-# Citing
+## Citing
 If you find this package useful in your work, feel free to cite
 ```bash
 @article{10.1093/gji/ggae329,
