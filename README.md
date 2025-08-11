@@ -17,12 +17,18 @@ FactoredEikonalFastMarching (https://github.com/JuliaInv/FactoredEikonalFastMarc
 # Citing
 If you find this package useful in your work, feel free to cite
 ```bash
-@article{robbe2023gaussianrandomfields, 
-  title={GaussianRandomFields.jl: A Julia package to generate and sample from Gaussian random fields}, 
-  author={Robbe, Pieterjan}, 
-  journal={Journal of Open Source Software}, 
-  volume={8}, 
-  number={89}, 
-  pages={5595}, 
-  year={2023} 
-} 
+@article{10.1093/gji/ggae329,
+    author = {Li, Yunduo and Zhang, Yijie and Zhu, Xueyu and Gao, Jinghuai},
+    title = {Seismic traveltime tomography based on ensemble Kalman inversion},
+    journal = {Geophysical Journal International},
+    volume = {240},
+    number = {1},
+    pages = {290-302},
+    year = {2024},
+    month = {09},
+    issn = {1365-246X},
+    doi = {10.1093/gji/ggae329},
+    url = {https://doi.org/10.1093/gji/ggae329},
+    eprint = {https://academic.oup.com/gji/article-pdf/240/1/290/60814646/ggae329.pdf},
+}
+
