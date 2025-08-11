@@ -1,5 +1,5 @@
 # EKI-Tomography
- This repository contains the code for the article: "Seismic traveltime tomography based on ensemble Kalman inversion" Published in Geophysical Journal International (DOI: http://dx.doi.org/10.1093/gji/ggab287)
+ This repository contains the code for the article: "Seismic traveltime tomography based on ensemble Kalman inversion" Published in Geophysical Journal International (DOI: https://doi.org/10.1093/gji/ggae329)
 ## Hardware Requirements
 CPU 4-core processor (Recommended 10-core processor or higher)
 
