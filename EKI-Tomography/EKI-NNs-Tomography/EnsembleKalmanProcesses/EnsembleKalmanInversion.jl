@@ -137,12 +137,10 @@ Inputs:
 function update_ensemble!(
     ekp::EnsembleKalmanProcess{FT, IT, Inversion},
     g::AbstractMatrix{FT};
-    u_noise::FT = 0.01,
     cov_threshold::Real = 0.01,
     Δt_new::Union{Nothing, FT} = nothing,
     deterministic_forward_map::Bool = true,
     failed_ens = nothing,
-    using_u_noise = true,
 ) where {FT, IT, CT <: Real}
 
     #catch works when g non-square
@@ -157,13 +155,6 @@ function update_ensemble!(
     # u: N_par × N_ens 
     # g: N_obs × N_ens
     u = get_u_final(ekp)
-
-    if using_u_noise == true
-        u_length = size(u)[1]
-        Q_covariance = Diagonal(u_noise^2 * ones(u_length)) 
-        u_p_noise = rand(ekp.rng, MvNormal(zeros(u_length), Q_covariance), ekp.N_ens)
-        u = u + u_p_noise
-    end
 
     N_obs = size(g, 1)
 
