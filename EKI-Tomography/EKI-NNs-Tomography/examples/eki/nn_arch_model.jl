@@ -157,10 +157,8 @@ function run()
 
     # compute groundtruth of τ
     println("\r\n|-- velocity origin forward \t-------------------------|")
-    # pEik_origin_T1 = [runExperimentAndWriteResults(vel_origin, h_origin, src_origin[i], n_origin, order_flag) for i in eachindex(src_origin)]
-    # τ_exact = [pEik_origin_T1[i][1:vel_sampling_interval:end, 1:vel_sampling_interval:end] for i in eachindex(src)]
-    pEik_origin_T1 = [runExperimentAndWriteResults(vel, h, src[i], n, order_flag) for i in eachindex(src)]
-    τ_exact = [pEik_origin_T1[i] for i in eachindex(src)]
+    pEik_origin_T1 = [runExperimentAndWriteResults(vel_origin, h_origin, src_origin[i], n_origin, order_flag) for i in eachindex(src_origin)]
+    τ_exact = [pEik_origin_T1[i][1:vel_sampling_interval:end, 1:vel_sampling_interval:end] for i in eachindex(src)]
     τ_exact_ref = runExperimentAndWriteResults(vel_origin, h_origin, src_ref, n_origin, order_flag)
    
     # Define the true values
@@ -240,6 +238,12 @@ function run()
             print_log("\r\n|-- EKI iteration: " * string(idx) * " \t-------------------------|")
 
             u_n = get_u_final(ekiobj)
+            Q_covariance = Diagonal(u_noise^2 * ones(nn_pars_vec_length)) 
+            u_p_noise = rand(rng, MvNormal(zeros(nn_pars_vec_length), Q_covariance), N_ens)
+            u_n = u_n + u_p_noise
+            pop!(ekiobj.u)
+            push!(ekiobj.u, DataContainer(u_n, data_are_columns = true))
+
             u_n_array_vec = zeros(vel_rows * vel_cols,  N_ens)
             u_n_array_vec_shared = SharedArray(u_n_array_vec)
             @sync @distributed for j in 1:N_ens
@@ -574,7 +578,7 @@ function run()
             # updates EKI
             αₙ = 1
             αₙ_inv = αₙ \ 1.0 
-            EnsembleKalmanProcesses.update_ensemble!(ekiobj, G_ens, u_noise = u_noise, deterministic_forward_map = true, Δt_new = αₙ_inv)
+            EnsembleKalmanProcesses.update_ensemble!(ekiobj, G_ens, deterministic_forward_map = true, Δt_new = αₙ_inv)
 
 
             time_cost = time_ns() - time_start - handle_data_cost_time
